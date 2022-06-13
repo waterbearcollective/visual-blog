@@ -1,0 +1,17 @@
+@import 'tailwindcss/base';
+@import './fonts-sarabun.css';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@layer base {
+  html, body {@apply h-full;}
+}
+
+@layer components {
+  a[disabled] {@apply pointer-events-none opacity-50;}
+}
+
+@layer utilities {
+  .markdown{@apply prose prose-sm md:prose lg:prose-lg prose-stone hover:prose-a:text-yellow-600  max-w-none;}
+  pre.Eleventy {@apply font-mono text-xs p-1 bg-gray-50;}
+}

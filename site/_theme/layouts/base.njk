@@ -1,0 +1,15 @@
+{% extends "html.njk" %}
+
+{% block SEO %}
+{% include "blocks/seo.njk" %}
+{% endblock %}
+
+{% block CONTENT %}
+{% include "blocks/header.njk" %}
+
+  <main class="px-2 xl:px-0">
+{{ content | safe }}
+  </main>
+
+{% include "blocks/footer.njk" %}
+{% endblock %}

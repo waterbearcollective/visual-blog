@@ -1,0 +1,25 @@
+---
+eleventyExcludeFromCollections: true
+permalink: "{{ section.prefix }}/feeds.xml"
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- {{ pkg.name }} v{{ pkg.version }} | {{ pkg.license }} | {{ pkg.author | safe }} -->
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>{{ site.title }}</title>
+  <link href="{{ page.url | url | absoluteUrl }}" rel="self"/>
+  <link href="{{ (section.prefix or '/') | url | absoluteUrl }}"/>
+  <updated>{{ build.time | dateISO }}</updated>
+  <author><name>{{ pkg.name }}</name></author>
+  <id>{{ page.url | url | absoluteUrl }}</id>
+  {% for item in collections[section.path] | sort(attribute='data.fruit.updated', reverse=true) %}
+  {% if (item.fileSlug !== section.path) %}
+  <entry>
+    <title>{{ (item.data.fruit.title[section.path] or site.title)}}</title>
+    <link href="{{ item.url | url | absoluteUrl }}"/>
+    <id>{{ item.url | url | absoluteUrl }}</id>
+    <updated>{{ item.data.fruit.updated | dateISO }}</updated>
+    <content type="html">{{ (item.data.fruit.content[section.path] or templateContent) | markdown }}</content>
+  </entry>
+  {% endif %}
+  {% endfor %}
+</feed>
